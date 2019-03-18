@@ -1,5 +1,4 @@
-import com.keepautomation.barcode.BarCode;
-import com.keepautomation.barcode.IBarCode;
+
 
 
 import java.util.ArrayList;
@@ -10,8 +9,7 @@ import java.util.UUID;
 public class Main {
 
     public static void main(String[] args) {
-        BarCode bar = new BarCode();
-        BarCode bar2 = new BarCode();
+
 
 
         int vsota = 0;

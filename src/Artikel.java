@@ -1,4 +1,3 @@
-import com.keepautomation.barcode.BarCode;
 
 import java.lang.*;
 import java.util.UUID;
