@@ -4,6 +4,7 @@ import java.util.UUID;
 
 
 public class Artikel implements Searchable {
+    private int Ce;
     private int Cena;
     private int Kolicina;
     private String Ime;
