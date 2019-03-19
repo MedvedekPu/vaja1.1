@@ -19,6 +19,15 @@ public class Racun implements Searchable {
         this.art=art;
         this.izdajatelj = izdajatelj;
     }
+
+    public Artikli getArt() {
+        return art;
+    }
+
+    public void setArt(Artikli art) {
+        this.art = art;
+    }
+
     public void setId(String id)
     {
         this.id = id;
@@ -49,7 +58,7 @@ public class Racun implements Searchable {
         return "Racun{" +
                 "id='" + id + '\'' +
                 ", izdajatelj=" + izdajatelj +
-                ", datum=" + datum +
+                ", datum=" + datum + "\n"+
                 ", artikli=" + art +
                 '}';
     }

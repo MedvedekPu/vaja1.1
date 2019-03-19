@@ -4,7 +4,7 @@ import java.util.List;
 public class Artikli {
 
 
-    private ArrayList<Artikel> tabela = new ArrayList<>();
+    private ArrayList<Artikel> tabela;
 
     public Artikli(List<Artikel> tabela) {
 
@@ -14,17 +14,12 @@ public class Artikli {
 
     public void dodaj(Artikel l) {
 
-        for(int i=1;i <= tabela.size();i++) {
+  /*      for(int i=1;i <= tabela.size();i++) {
             if (this.tabela.get(i).compare()) {
 
-            }
+               }*/
             tabela.add(l);
-        }
-
-
-
-
-
+//        }
 
     }
 

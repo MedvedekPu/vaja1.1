@@ -1,7 +1,7 @@
 
 import java.lang.*;
 import java.util.UUID;
-
+import java.util.Locale;
 
 public class Artikel implements Searchable {
     private int Ce;
@@ -10,6 +10,17 @@ public class Artikel implements Searchable {
     private String Ime;
     private int EAN;
     private String id;
+    private int ddv;
+    private String drzava;
+
+
+    public String getDrzava() {
+        return drzava;
+    }
+
+    public void setDrzava(String drzava) {
+        this.drzava = drzava;
+    }
 
     public String getId() {
         return id;
@@ -18,11 +29,6 @@ public class Artikel implements Searchable {
     public void setId(String id) {
         this.id = id;
     }
-
-//arCode barcode; // ean koda
-
-
-    private int ddv;
 
     public int getDdv() {
         return ddv;
@@ -86,10 +92,14 @@ public class Artikel implements Searchable {
     @Override
     public boolean search(String n) {
         if (n == getIme())
-            return false;
+            return true;
 
         return false;
     }
+
+
+
+
 
     private int random() {
 
@@ -103,6 +113,13 @@ public class Artikel implements Searchable {
         }
 
     return false;
+    }
+    public  int preveri_dravo(){
+
+
+        //System.out.println( get);
+
+        return 0;
     }
 
 

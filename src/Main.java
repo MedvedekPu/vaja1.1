@@ -4,9 +4,10 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
-public class Main {
+public class  Main {
 
     public static void main(String[] args) {
 
@@ -18,36 +19,13 @@ public class Main {
         int DDVvsota = 0;
         int ean = 0;
 
-
-
-      /*  bar.setCodeToEncode("123456789933");
-        bar.setSymbology(IBarCode.EAN13);
-        bar.setX(2);
-        bar.setY(50);
-        bar.setRightMargin(0);
-        bar.setLeftMargin(0);
-        bar.setTopMargin(0);
-        bar.setBottomMargin(0);
-
-        try
-        {
-
-            bar.draw("C:\\Fax\\Prog_jeziki_2019\\ean13.gif");
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-
         UUID uuid = UUID.randomUUID();
         String randUUIDString = uuid.toString();
-        List<Artikel> seznam = new ArrayList<>();
+       List<Artikel> seznam = new ArrayList<>();
         seznam.add(new Artikel(250, "pepsi", 1,randUUIDString));
         seznam.add(new Artikel(300, "fanta", 2,randUUIDString));
         seznam.add(new Artikel(100, "sprite", 3,randUUIDString));
         seznam.add(new Artikel(100, "sok", 2,randUUIDString));
-        seznam.add(new Artikel(100, "sok", 1,randUUIDString));
 
         for (Artikel pr : seznam) {
             vsota += pr.getCena() * pr.getKolicina();
@@ -58,16 +36,22 @@ public class Main {
 
 
         Artikli test1 = new Artikli(seznam);
-        test1.dodaj(new Artikel(2, "pivo", 1,randUUIDString));
+        test1.dodaj(seznam.get(0));
+
+        List<Artikel> s = new ArrayList<>();
+        s.add(new Artikel(2,"ss0",1,randUUIDString));
+        Artikli t2 = new Artikli(s);
+        System.out.println("IZPIS_testni: "+ s);
+
 
         //Racun test = new Racun(randUUIDString,test1,datum,);
-        System.out.println(seznam);
+        System.out.println(seznam.toString());
 
         System.out.println("Skupna cena: " + vsota + " KONCNA: " + m);
 
         //System.out.println(test);
         //System.out.println(test);
-        System.out.println("uuid" + randUUIDString);
+        //System.out.println("uuid" + randUUIDString);
 
 
         //2naloga
@@ -78,11 +62,30 @@ public class Main {
         System.out.println(p1);
 
 
-        Racun noviRacun = new Racun(randUUIDString, test1,  new Date(), p1);
+        Racun noviRacun = new Racun(randUUIDString,test1,  new Date(), p1);
+        //Racun n2 = new Racun(randUUIDString,seznam,new Date(),p2);
         System.out.println(noviRacun);
+
+
+
+
 
         seznam.remove(0);
         seznam.remove(1);
+
+
+
+        /*String[] locales = Locale.getISOCountries();
+
+        for (String countryCode : locales) {
+
+            Locale obj = new Locale("", countryCode);
+
+            System.out.println("Country Code = " + obj.getCountry()
+                    + ", Country Name = " + obj.getDisplayCountry());
+
+        }*/
+
 
 
     }
