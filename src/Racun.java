@@ -9,17 +9,26 @@ public class Racun implements Searchable {
     protected Date datum;
     Artikli art;
     Podjetje izdajatelj; // 2.1
+    int davcna; //davcna st. kupca
 
 
 
 
-    public Racun(String id, Artikli art, Date datum, Podjetje izdajatelj) {
+    public Racun(String id, Artikli art, Date datum, Podjetje izdajatelj, int davcna) {
         this.id = id; // web unique key
         this.datum = datum;
         this.art=art;
+        this.davcna=davcna;
         this.izdajatelj = izdajatelj;
     }
 
+    public int getDavcna() {
+        return davcna;
+    }
+
+    public void setDavcna(int davcna) {
+        this.davcna = davcna;
+    }
     public Artikli getArt() {
         return art;
     }
@@ -55,12 +64,13 @@ public class Racun implements Searchable {
 
     @Override
     public String toString() {
-        return "Racun{" +
-                "id='" + id + '\'' +
-                ", izdajatelj=" + izdajatelj +
-                ", datum=" + datum + "\n"+
-                ", artikli=" + art +
-                '}';
+        return "Racun: " +
+                "id='" + id + "\n"+ "davcna st:" + davcna + "\n" +
+                "-----------------------------------------------"+"\n"+
+                "izdajatelj: " + izdajatelj + "\n"+
+                "datum: " + datum + "\n"+
+                 art +
+                "\n"+ "----------------------------------------------------------";
     }
 
 

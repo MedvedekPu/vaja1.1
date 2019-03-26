@@ -1,7 +1,7 @@
 public class Podjetje  implements Searchable{
      String Ime;
      int davcna;
-    long maticna;
+     long maticna;
      boolean zavezanec;
 
     public Podjetje(String ime, int davcna, long maticna, boolean zavezanec) {

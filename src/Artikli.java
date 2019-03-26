@@ -33,8 +33,8 @@ public class Artikli {
 
     @Override
     public String toString() {
-        return "Artikli{" +
-                "tabela=" + tabela +
+        return "Artikli: " +
+                tabela +
                 '}';
     }
 
