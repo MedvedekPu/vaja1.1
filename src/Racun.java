@@ -73,12 +73,20 @@ public class Racun implements Searchable {
                 "\n"+ "----------------------------------------------------------";
     }
 
+    public String neorg(){
+        return "Racun: " +
+                "id='" + id + "\n"+ "davcna st:" + davcna + "\n" +
+                "datum: " + datum + "\n"+
+                art +
+                "\n"+ "----------------------------------------------------------";
+
+    }
 
 
 
     @Override
     public boolean search(String n) {
-        if(n==getIzdajatelj().getIme())
+        if(id.contains(n)||String.valueOf(datum).contains(n)||String.valueOf(davcna).contains(n)||izdajatelj.search(n))
             return true;
 
         return false;

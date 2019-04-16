@@ -11,9 +11,10 @@ public class  Main {
 
     public static void main(String[] args) {
 
-        int[]  EAN1= {9,1,3,0,0,3,3,5,1,2,2,8,0};
-        int[]  EAN2 ={3,8,3,1,2,3,2,1,2,3,2,2,0};
-        int[]  EAN3 ={4,0,2,1,2,3,2,1,2,3,1,5,0};
+        long[]  EAN1= {2,1,1,0,0,3,3,0,2,0,0,8,0};
+        long[]  EAN2 ={2,2,1,1,2,3,2,1,2,3,2,2,3};
+        long[]  EAN3 ={2,3,1,1,2,3,2,1,2,3,1,5,2};
+
 
         int vsota = 0;
         int m = 0;
@@ -27,10 +28,9 @@ public class  Main {
         String randUUIDString = uuid.toString();
        List<Artikel> seznam = new ArrayList<>();
 
-        seznam.add(new Artikel(250, "pepsi", 1,randUUIDString,EAN1));
-        seznam.add(new Artikel(300, "fanta", 2,randUUIDString,EAN2));
-        seznam.add(new Artikel(100, "sprite", 3,randUUIDString,EAN2));
-        seznam.add(new Artikel(100, "sok", 2,randUUIDString,EAN3));
+        seznam.add(new Artikel(250, "jabolka", 1,randUUIDString,EAN1,0));
+        seznam.add(new Artikel(300, "p", 2,randUUIDString,EAN2,13));
+        seznam.add(new Artikel(100, "kruh beli", 2,randUUIDString,EAN3,0));
 
         for (Artikel pr : seznam) {
             vsota += pr.getCena() * pr.getKolicina();
@@ -38,7 +38,7 @@ public class  Main {
             m = (vsota + DDVvsota) / 1000;
 
         }
-        Artikel t1 = new Artikel(300, "pepsi", 1,randUUIDString,EAN2);
+        Artikel t1 = new Artikel(300, "pepsi", 1,randUUIDString,EAN2,0);
 
 
 
@@ -48,24 +48,17 @@ public class  Main {
         test1.dodaj(seznam.get(0));
         test1.dodaj(seznam.get(1));
         test1.dodaj(seznam.get(2));
-        test1.dodaj(seznam.get(3));
-       // test1.dodaj(seznam.get(1));
+
+
+        Artikli test3 = new Artikli();
+        test3.dodaj(t1);
+
 
 
         List<Artikel> s = new ArrayList<>();
-        s.add(new Artikel(2,"ss0",1,"123435454534",EAN2));
+        s.add(new Artikel(2,"ss0",1,"123435454534",EAN2,0));
         Artikli t2 = new Artikli(s);
         //System.out.println("IZPIS_testni: "+ s);
-
-
-        //Racun test = new Racun(randUUIDString,test1,datum,);
-       // System.out.println(seznam.toString());
-
-
-        //System.out.println(test);
-        //System.out.println(test);
-        //System.out.println("uuid" + randUUIDString);
-
 
         //2naloga
 
@@ -91,44 +84,49 @@ public class  Main {
 
 
 
-        System.out.println("Skupna cena__: " + vsota + " KONCNA: " + m);
+        System.out.println("Skupna cena__: " + vsota + " KONCNA z ddv: " + m); // skupna cena z DDV-jem
+
+
+        System.out.println("IZPIS CE JE ENUM VELJAVEN: " +t1.checkDigit(t1.getEAN()) +"\n"); // check digit preizkus
+        System.out.println("NAJDENO ALI NE" + t1.search("pepsi") ); // search metoda preizkus
+        System.out.println("NAJDENO ALI NE  test1:  " + test1.search("kruh beli") ); // search metoda preizkus
+
+
+
+
+        Racun noviRacun2 = new Racun(randUUIDString,test1,  new Date(), p1,53215465);
+
+
+        System.out.println("PRIMER IZPISA ARTIKLOV IZ JSONA");
+        Artikli test2 = new Artikli();
+        test1.toJson();
+        test2.fromJson();
+
+
+        Companies comp1 = new Companies();
+        comp1.dodaj_tab(p1);
+        System.out.println("PRIMER IZPISA PODJETJA IZ JSONA");
+        comp1.toJson();
+        comp1.fromJson();
+
+        Invoices inv1 = new Invoices();
+        inv1.dodaj_tab(noviRacun);
+
+        System.out.println("PRIMER IZPISA RACUNA IZ JSONA");
+        inv1.toJson();
+        inv1.fromJson();
 
 
 
 
 
-        seznam.remove(0);
+
+
+      /*  seznam.remove(0);
         seznam.remove(1);
-
-
-
-       /* String[] locales = Locale.getISOCountries();
-
-        for (String countryCode : locales) {
-
-            Locale obj = new Locale("", countryCode);
-
-            System.out.println("Country Code = " + obj.getCountry()
-                    + ", Country Name = " + obj.getDisplayCountry());
-
-        }*/
-
-        System.out.println("IZPIS CE JE ENUM VELJAVEN: " +t1.checkDigit(t1.getEAN()));
-
-
+*/
 
 
     }
 
-
-    /**
-     *
-     * Ali za znesek uporabiti int ali double?
-     * int
-     * Kaj je ID? kako ga implementirati?
-     *
-     * Kaj je EAN koda?
-     * Ali je primerna za primarni ključ? Da
-     *
-     */
 }

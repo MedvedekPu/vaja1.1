@@ -2,20 +2,30 @@
 import java.lang.*;
 
 public class Artikel implements Searchable {
-    private int Ce;
     private int Cena;
+    private int teza;
+    private String oddelek;
     private int Kolicina;
     private String Ime;
-    int[] EAN = new int[13];///= {0,0,0,0,0,0,0,0,0,0,0,0,0};
+    long[] EAN;// = new int[13];///= {0,0,0,0,0,0,0,0,0,0,0,0,0};
     private String id;
     private int ddv;
     private String drzava;
 
-    public int[] getEAN() {
+
+    public int getTeza() {
+        return teza;
+    }
+
+    public void setTeza(int teza) {
+        this.teza = teza;
+    }
+
+    public long[] getEAN() {
         return EAN;
     }
 
-    public void setEAN(int[] EAN) {
+    public void setEAN(long[] EAN) {
         this.EAN = EAN;
     }
 
@@ -27,6 +37,14 @@ public class Artikel implements Searchable {
 
         this.drzava = drzava;
 
+    }
+
+    public String getOddelek() {
+        return oddelek;
+    }
+
+    public void setOddelek(String oddelek) {
+        this.oddelek = oddelek;
     }
 
     public String getId() {
@@ -72,13 +90,15 @@ public class Artikel implements Searchable {
     }
 
 
-    public Artikel(int Cena, String ime, int Kolicina,String id, int[] EAN) {
+    public Artikel(int Cena, String ime, int Kolicina,String id, long[] EAN, int teza) {
 
         this.id=id;
         this.Cena = Cena;
         this.Ime = ime;
         this.Kolicina = Kolicina;
         this.EAN =EAN;
+
+        this.teza=teza;
 
     }
 
@@ -87,11 +107,12 @@ public class Artikel implements Searchable {
         return "\n" + "Artikel{" +
                 "Cena=" + Cena +
                 ", Kolicina=" + Kolicina +
-                ", Ime='" + Ime + '\'' + "EAN= "+converrt(EAN) + " " + najdi_d(drzava,EAN) +
+                ", Ime='" + Ime + '\'' + "EAN= "+converrt(EAN) + " " + najdi_d(drzava,EAN)  +" "+ pregled_teze(EAN) +"g"+
                 '}';
     }
 
-    public  String converrt(int EAN[]){
+    public  String converrt(long EAN[]){
+       posodobljen(EAN);
     String strArray = new String();
         for(int i=0; i<EAN.length;i++) {
         strArray +=String.valueOf(EAN[i]);
@@ -101,8 +122,72 @@ public class Artikel implements Searchable {
 
 }
 
-public String najdi_d(String drzava,int[] x){
-   if (x[0] == 3 && x[1] == 8 && x[2] == 3) {
+
+public  long[] posodobljen(long [] x ){
+        if(teza!=0) {
+            long tmp1 = 0;
+            tmp1 = teza;
+            long[] tt = new long[4];
+
+                tt[0]= teza / 1000;
+                teza = teza % 1000;
+                tt[1] = teza /100;
+                teza = teza % 100;
+                tt[2] = teza /10;
+                teza = teza %10;
+                tt[3] = teza;
+
+            x[8] = tt[0];
+            x[9] = tt[1];
+            x[10] = tt[2];
+            x[11] = tt[3];
+        }else {
+            return x;
+        }
+    return x;
+}
+
+
+public int pregled_teze(long[] x){
+
+     // if(teza==0) {
+          long tmp = 0;
+          tmp = x[8] * 1000;
+          teza = (int) tmp;
+          tmp = x[9] * 100;
+          teza += tmp;
+          tmp = x[10] * 10;
+          teza += tmp;
+          tmp = x[11] * 1;
+          teza += tmp;
+
+    return teza;
+}
+public int vrni_tezo(){
+    int t=0;
+        long[] x= new long[13];
+            t = pregled_teze(x);
+        return  t;
+}
+
+
+public String najdi_d(String drzava,long[] x){
+
+    if (x[0] == 2 && x[1] == 1 && x[2] == 1) {
+        drzava="oddelek Sadja";
+
+    }
+    else if(x[0] == 2 && x[1] == 2 && x[2] == 1){
+        drzava = "oddelek mesa";
+    }
+    else if(x[0] == 2 && x[1] == 3 && x[2] == 1){
+        drzava ="oddelek kruha";
+    }
+    else if(x[0] == 2 && x[3] == 1 && x[1] == 1){
+        drzava ="Oddelek zelenjave";
+    }
+
+   else if (x[0] == 3 && x[1] == 8 && x[2] == 3) {
            drzava="Slovenija";
         }
    else  if (x[0] == 3 && x[1] == 8 && x[2] == 0) {
@@ -169,7 +254,7 @@ public String najdi_d(String drzava,int[] x){
         drzava="Makedonija";
     }
 
-    else if (x[0] == 3 && x[1] == 8 && x[2] == 5){
+    else if (x[0] == 5 && x[1] == 8 && x[2] == 5){
         drzava="Irska";
     }
     else if (x[0] == 5 && x[1] == 4 ){
@@ -234,31 +319,31 @@ public String najdi_d(String drzava,int[] x){
 
 }
 
-    @Override
+
     public boolean search(String n) {
-        if (getIme().contains("sok"))
-            return true;
+        if (Ime.contains(n) || drzava.contains(n) || String.valueOf(Cena).contains(n) || String.valueOf(EAN).contains(n) || String.valueOf(Kolicina).contains(n)) {
+                return true;
+
+            }
 
         return false;
-    }
 
-     public boolean compare(){
-        if(this.getIme()== this.getIme()){
-            this.setKolicina(1);
-        return true;
-        }
 
-    return false;
+
+
     }
 
 
-    public  boolean checkDigit(int x[]) {
+
+
+    public  boolean checkDigit(long x[]) {
 
         int sodo = 0;
         int liho = 0;
         int skupajSUM = 0;
         int checksum_digit = 0;
-        int lastItem = x[x.length - 1];
+        long lastItem = x[x.length - 1];
+
 
         for (int i = 0; i <= x.length - 1; i++) {
 
@@ -284,9 +369,9 @@ public String najdi_d(String drzava,int[] x){
         }
         if (checksum_digit == lastItem)
             return false;
-        else
+        else{
 
-            return true;
+            return true;}
 
     }
 

@@ -56,7 +56,7 @@ public class Podjetje  implements Searchable{
 
     @Override
     public boolean search(String n) {
-        if(n==getIme())
+        if(Ime.contains(n)||String.valueOf(davcna).contains(n)||String.valueOf(maticna).contains(n))
             return true;
 
         return false;
