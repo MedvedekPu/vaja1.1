@@ -100,21 +100,21 @@ public class  Main {
         System.out.println("PRIMER IZPISA ARTIKLOV IZ JSONA");
         Artikli test2 = new Artikli();
         test1.toJson();
-        test2.fromJson();
+        test2.fromJson("C:\\Users\\aleks\\Desktop\\test.json");
 
 
         Companies comp1 = new Companies();
         comp1.dodaj_tab(p1);
         System.out.println("PRIMER IZPISA PODJETJA IZ JSONA");
         comp1.toJson();
-        comp1.fromJson();
+        comp1.fromJson("C:\\Users\\aleks\\Desktop\\test_c.json");
 
         Invoices inv1 = new Invoices();
         inv1.dodaj_tab(noviRacun);
 
         System.out.println("PRIMER IZPISA RACUNA IZ JSONA");
         inv1.toJson();
-        inv1.fromJson();
+        inv1.fromJson("C:\\Users\\aleks\\Desktop\\test2.json");
 
 
 

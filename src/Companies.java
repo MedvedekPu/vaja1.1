@@ -54,42 +54,24 @@ public void dodaj_tab(Podjetje g){
         return false;
     }
 
-    @Override
-    public void toJson() {
+
+    public String toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         System.out.println(json);
+            Helper.WritetoFile("C:\\Users\\aleks\\Desktop\\test_c.json",json);
 
-        //2. Convert object to JSON string and save into a file directly
-        try (FileWriter writer = new FileWriter("C:\\Users\\aleks\\Desktop\\test_c.json")) {
-
-            gson.toJson(this, writer);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+            return json;
 
     }
 
     @Override
-    public void fromJson() {
+    public void fromJson(String json) {
+
         Gson gson = new Gson();
 
-        try (Reader reader = new FileReader("C:\\Users\\aleks\\Desktop\\test_c.json")) {
+        Companies obj = gson.fromJson(Helper.ReadFromFile(json), Companies.class);
+        System.out.println(obj);
 
-            // Convert JSON to Java Object
-            Companies obj = gson.fromJson(reader, Companies.class);
-            System.out.println(obj);
-
-            // Convert JSON to JsonElement, and later to String
-            /*JsonElement json = gson.fromJson(reader, JsonElement.class);
-            String jsonInString = gson.toJson(json);
-            System.out.println(jsonInString);*/
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

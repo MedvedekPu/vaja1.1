@@ -52,41 +52,37 @@ public class Invoices implements JsonSupport {
         return false;
     }
 
-    @Override
-    public void toJson() {
+
+    public String  toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         //System.out.println(json);
 
         //2. Convert object to JSON string and save into a file directly
-        try (FileWriter writer = new FileWriter("C:\\Users\\aleks\\Desktop\\test2.json")) {
+        /*try (FileWriter writer = new FileWriter("C:\\Users\\aleks\\Desktop\\test2.json")) {
 
             gson.toJson(this, writer);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
+        Helper.WritetoFile("C:\\Users\\aleks\\Desktop\\test2.json",json);
+
+
+        return json;
     }
 
 
 
     @Override
-    public void fromJson() {
+    public void fromJson(String json) {
+
         Gson gson = new Gson();
 
-        try (Reader reader = new FileReader("C:\\Users\\aleks\\Desktop\\test2.json")) {
+        Invoices obj = gson.fromJson(Helper.ReadFromFile(json), Invoices.class);
+        System.out.println(obj);
 
-            // Convert JSON to Java Object
-            Invoices obj = gson.fromJson(reader, Invoices.class);
-            System.out.println(obj);
 
-            // Convert JSON to JsonElement, and later to String
-            /*JsonElement json = gson.fromJson(reader, JsonElement.class);
-            String jsonInString = gson.toJson(json);
-            System.out.println(jsonInString);*/
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
