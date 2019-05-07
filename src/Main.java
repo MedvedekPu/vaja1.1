@@ -1,6 +1,12 @@
 
 
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +15,27 @@ import java.util.UUID;
 
 public class  Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException
+    {
+
+        try (BasicDataSource dataSource = DBHelper.getDataSource();
+             Connection connection = dataSource.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM actor");)
+        {
+            System.out.println("The Connection Object is of Class: "+connection.getClass());
+            try (ResultSet resultSet = pstmt.executeQuery())
+            {
+                while (resultSet.next())
+                {
+                    System.out.println(resultSet.getString(1) + "," + resultSet.getString(2) + "," + resultSet.getString(3));
+                }
+            }
+            catch (Exception e)
+            {
+                //connection.rollback();
+                e.printStackTrace();
+            }
+        }
 
         long[]  EAN1= {2,1,1,0,0,3,3,0,2,0,0,8,0};
         long[]  EAN2 ={2,2,1,1,2,3,2,1,2,3,2,2,3};
@@ -115,6 +141,12 @@ public class  Main {
         System.out.println("PRIMER IZPISA RACUNA IZ JSONA");
         inv1.toJson();
         inv1.fromJson("C:\\Users\\aleks\\Desktop\\test2.json");
+
+
+
+
+
+
 
 
 
